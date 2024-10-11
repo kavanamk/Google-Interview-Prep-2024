@@ -1,27 +1,28 @@
-def lengthOfLongestSubstring( s):
-    n=len(s)
-    max_len=0
-    i=0
-    while True:
-        lls_window=''
-        while True:
-            print(s[i])
-            if s[i] not in lls_window:
-                lls_window+=s[i]
-                i+=1
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n=len(s)
+        if n==1 or n==0:
+            return n
+        maxlen=0
+        window=set()
+        i,j=0,0
+        while j<n:
+            
+            if s[j] not in window:
+                window.add(s[j])
+                j=j+1
             else:
-                i+=1
-                break
-        if i==n-1:
-            break
+                window=set()
+                i=i+1
+                j=i+1
+                window.add(s[i])
+            maxlen=max(maxlen,len(window))
+            #print(window)
             
-        max_len=max(max_len,len(lls_window))
-        
-    return max_len
-            
-        
-       
-    
-s = "abcabcbb"
+        return maxlen
 
-print(lengthOfLongestSubstring(s))
+#my own fucking code lol, beat this chatgpt 
